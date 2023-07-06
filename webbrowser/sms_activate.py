@@ -8,7 +8,9 @@ from functions.sms_activate_apis import *
 
 def set_sms_code(driver, country):
     cou = None
-
+    driver.get('https://www.mamba.ru')
+    timer(clicker, driver, "//a[@data-name='by-phone-action']")
+    
     time.sleep(2)
     elem = driver.find_element(By.CSS_SELECTOR, ".sc-1oc8snq-1.fnAXkI")
     time.sleep(1)
@@ -34,6 +36,7 @@ def set_sms_code(driver, country):
 
     country, operator = country_number(cou)
     phone, num_id = five_sim_buy(country, operator)
+
     timer(sender, driver, "//input[@placeholder='Номер телефона']", phone)
 
     timer(clicker, driver, "//input[@value='Получить код подтверждения']")
@@ -63,4 +66,4 @@ def set_sms_code(driver, country):
     if not sms_code:
         pass
 
-
+    return sms_code

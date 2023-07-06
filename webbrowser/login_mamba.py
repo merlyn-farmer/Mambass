@@ -68,7 +68,10 @@ def mamba_login(driver, email):
     timer(clicker, driver, "//input[@value='Далее']")
     timer(sender, driver, "//input[@placeholder='Электронная почта']", email)
     timer(clicker, driver, "//button[contains(text(),'Регистрация с почтой')]")
-    timer(clicker, driver, "//a[@data-name='by-phone-action']")
+
+
+
+def send_code(driver):
 
     res = set_sms_code(driver, 'ger')
 
@@ -78,5 +81,6 @@ def mamba_login(driver, email):
     if not res:
         raise Exception('sms-code no coming')
 
-    time.sleep(7)
+    time.sleep(10)
+    print('clc понятно')
     timer(clicker, driver, "//button[contains(text(),'Понятно')]")

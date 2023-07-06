@@ -10,7 +10,11 @@ def create_profile(session_name, port):
         "name": f"{session_name}",
         "browser": "mimic",
         "os": "win",
-        "enableLock": True
+        "enableLock": True,
+        "extensions": {
+            "enable": True,
+            "names": ["capmonster.crx"]
+        }
     }
     header = {
         "accept": "application/json",
@@ -18,7 +22,6 @@ def create_profile(session_name, port):
     }
     url = f"http://localhost:{port}/api/v2/profile"
     req = requests.post(url, data=json.dumps(x), headers=header)
-
     return json.loads(req.content).get("uuid")
 
 
@@ -46,6 +49,7 @@ def update_profile_proxy(profile_id, proxy_type, proxy_host, proxy_port, proxy_u
 
 def update_profile_geo(profile_id, latitude, longitude, port):
     """update profile geo"""
+    print(profile_id)
     url = f'http://localhost:{port}/api/v2/profile/' + profile_id
     header = {
         "accept": "application/json",
